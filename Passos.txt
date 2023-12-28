@@ -30,3 +30,5 @@ dentro desse arquivo é onde iremos importar e inicializar os modelos criados.
     - Configurar o arquivo criado na migration;
     - Criar e configurar o arquivo criado dentro da pasta models;
     - Configurar o arquivo index.js com o modelo de Usuario
+
+11° Criar erros personalizados;
