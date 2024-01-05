@@ -2,7 +2,7 @@
 
 const Sequelize = require('sequelize');
 const dbConfig = require('../config/database');
-const connection = new sequelize(dbConfig);
+const connection = new Sequelize(dbConfig);
 
 
 //Todo modelo que for criado precisa ser importado nesse arquivo e inicializado

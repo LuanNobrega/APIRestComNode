@@ -18,7 +18,7 @@ class Usuario extends Model {
             createAt: 'criadoEm',
             updateAt: 'atualizadoEm',
             timestamps: true,
-            underscore: false
+            underscored: false
         });
     }
 }

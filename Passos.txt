@@ -32,3 +32,17 @@ dentro desse arquivo é onde iremos importar e inicializar os modelos criados.
     - Configurar o arquivo index.js com o modelo de Usuario
 
 11° Criar erros personalizados;
+
+12° Criar o serviço de usuário
+    - Dentro da pasta service, criar o arquivo "usuárioService",  que é o arquivvo que conhece toda a lógica de negocio de uma API.
+    - Na pasta "utils" criar um arquivo chamado "geradorToken.js", ele vai saber gerar token e gerar a senha para nós.
+    - Baixar o md5 (npm i md5), é um tipo de criptografia que faz e não desfaz, gerar o hash das senhas, gera criptografados.
+    - Exportar o gerador para o usuarioService e adicionar a lógica.
+    - Exportar o usuarioService para o usuarioController e fazer a lógica.
+
+13° Para debugar uma aplicação com Node.js. - Aperta "F5" e seleciona "Node.js" e em seguida coloca o braik point". 
+
+14° Criar uma pasta chamada http para fazer os testes, nessa parta estara todas as requisições http da API.
+    - Instalar a extensão, REST client, ela permite que façamos requisições http por dentro do VScode. 
+
+15° Criar o cache, vai ser a lista em memoria que armazena todos os usuarios presentes na aplicação; 
