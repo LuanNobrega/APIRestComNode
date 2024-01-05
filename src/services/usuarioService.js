@@ -1,7 +1,11 @@
 const Usuario = require('../models/Usuario')
-const {NaoAutorizadoErro} = require('../erros/typeErros')
+constPerfil = require('../models/Perfil')
+const {NaoAutorizadoErro, NaoEncontradoErro} = require('../erros/typeErros')
 const geradorToken = require('../utils/geradorToken')
 const usuarioCache = require('../cache/usuarioCache') 
+const Perfil = require('../models/Perfil')
+const UsuarioDTO = require('../dtos/usuarioDTO')
+const PerfilDTO = require('../dtos/PerfilDTO')
 
 async function validarUsuario(email, senha){
 
@@ -23,6 +27,35 @@ async function validarUsuario(email, senha){
 
 }
 
+async function logout(token){
+    usuarioCache.removerNoCache(token);
+}
+
+async function obterPorId(id){
+    let usuario = await Usuario.findByPk(id);
+    if(!usuario){
+        throw new NaoEncontradoErro(404, "Não foi possível encontrar o usuário pelo id"+ id);
+    }
+    usuario.senha = undefined;
+
+    let usuarioDTO = new UsuarioDTO(usuario); 
+    let perfil = await Perfil.findByPk(usuario.idPerfil);
+
+    usuarioDTO.perfil = new PerfilDTO(perfil);
+    return usuarioDTO;
+}
+
+async function validarAutenticacao(token){
+    let credencial = usuarioCache.obterCredendialPorToken(token);
+    if(!credencial || credencial.dataExpiracao < new Date()){
+        if(credencial){
+            usuarioCache.removerNoCache(credencial.token);
+        }
+        return false;
+    }
+    return true;
+}
+
 //Função privada
 function _criarCredencial(usuario){
 
@@ -41,9 +74,9 @@ function _criarCredencial(usuario){
 
     let token = geradorToken.criarToken(usuario);
     usuario.senha = undefined;
-    credencial = { token, usuario, dataExpiracao}
+    credencial = { token, usuario, dataExpiracao};
     usuarioCache.adicionarNoCache(credencial);
     return credencial;
 }
 
-module.exports = {validarUsuario};
+module.exports = {validarUsuario, logout, obterPorId, validarAutenticacao};

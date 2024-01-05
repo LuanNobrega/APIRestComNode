@@ -46,3 +46,13 @@ dentro desse arquivo é onde iremos importar e inicializar os modelos criados.
     - Instalar a extensão, REST client, ela permite que façamos requisições http por dentro do VScode. 
 
 15° Criar o cache, vai ser a lista em memoria que armazena todos os usuarios presentes na aplicação; 
+
+16° Criar o método de logout. Criar uma função no usuário controller e uma função no usuário service. 
+
+16° Criar método para obter o usuário pelo seu ID. 
+
+17° Criar os dtos, criado para transformar e enviar dados para o front-end. Recebe dados e transforma em dtos e depois envia para os clientes. 
+    - Criar o arquivo "usuarioDTO.js" - Classe que vai ter toda a lógica de como funciona u8m usuário dentro da aplicação.
+    - Importar tanto o Perfil em usuarioService, 
+
+18° Criar um interceptador de rotas, criar um "routes,use" no arquivos de rotas. 

@@ -4,7 +4,7 @@ const usuariosLogados = [];
 
 function adicionarNoCache(credencial){
 
-    if(!credencial || !credencial.usuario || !credencial.tojen || !credencial.dataExpiracao){
+    if(!credencial || !credencial.usuario || !credencial.token || !credencial.dataExpiracao){
         throw new NaoAutorizadoErro();
     }
 
