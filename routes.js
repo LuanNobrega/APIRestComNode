@@ -4,9 +4,11 @@ const routes = express.Router(); //Com esse cara dizemos que esse arquivo é um 
 
 const UsuarioController = require('./src/controllers/UsuarioController');
 const usuarioService = require('./src/services/usuarioService');
+const ClienteController = require('./src/controllers/ClienteController copy');
 
 //Instaciar um usuário controler para ter acesso a tudo que está dentro dele
 const usuarioController = new UsuarioController();
+const clienteController = new ClienteController();
 
 
 //Método interceptador, sempre vai cair aqui primeiro. Intercepta todas as rotas e aqui podemso tomar qualquer ação antes de bater em uma rota específica. 
@@ -31,5 +33,10 @@ routes.delete("/logout", usuarioController.logout);
 routes.get("/usuarios/:id", usuarioController.obterPorId);
 routes.post("/usuarios", usuarioController.cadastrar);
 routes.put("/usuariosatualizar/:id", usuarioController.atualizar);
+
+//Rotas de cliente
+routes.get("/clientes/:id", clienteController.obterPorId);
+routes.post("/clientes", clienteController.cadastrar);
+routes.put("/clientes/:id", clienteController.atualizar);
 
 module.exports = routes;

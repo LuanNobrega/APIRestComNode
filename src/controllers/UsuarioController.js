@@ -70,10 +70,6 @@ class UsuarioController{
             return res.status(error.status).json(error);
         }
     }
-
-    atualizar(req, res){
-        
-    }
     
     inativar(req, res){
         

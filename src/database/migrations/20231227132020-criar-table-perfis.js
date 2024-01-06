@@ -15,12 +15,14 @@ module.exports = {
       },
       createAt: {
         type: Sequelize.DATE,
-        defaultValue: Sequelize.fn('NOW')
+        defaultValue: Sequelize.fn('NOW'),
+        field: 'create_at'
       },
       updateAt:{
         type: Sequelize.DATE,
         defaultValue: null,
-        allowNull: true
+        allowNull: true,
+        field: 'update_at'
       }
 
 

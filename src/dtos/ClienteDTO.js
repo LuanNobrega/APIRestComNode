@@ -7,14 +7,14 @@ module.exports = class ClienteDTO{
         this.id = obj.id;
         this.nome = obj.nome;
         this.email = obj.email;
-        this.cpfOuCnpj = obj.cpfOuCnpj;
+        this.cpfoucnpj = obj.cpfoucnpj;
         this.telefone = obj.telefone;      
         this.enderecos =obj.enderecos && obj.enderecos.map(e => new EnderecoDTO(e)) || []; 
-        this.createAt = obj.createAt;
-        this.updateAt = obj.updateAt;
+        this.created_at = obj.created_at;
+        this.updated_at = obj.updated_at;
     }
 
-    modeloValido(){
+    modeloValidoCadastro(){
         let valido = !!(this.nome);
         if(!valido){
             throw new ModeloInvalidoErro(400, 'O nome é obrigatório para cadastro.')

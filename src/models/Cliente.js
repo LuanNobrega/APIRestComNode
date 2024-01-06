@@ -6,16 +6,16 @@ const {Model, DataTypes} = require('sequelize');
 class Cliente extends Model {
     static init(connection){
         super.init({
-            descricao: DataTypes.STRING, //Não apsseo o id e os "dates" pois o sequelize já entendem eles
+            nome: DataTypes.STRING, //Não apsseo o id e os "dates" pois o sequelize já entendem eles
             email: DataTypes.STRING,
-            telefone: DataTypes.STRING ,
-            cpfOuCnpj: DataTypes.STRING
+            cpfoucnpj: DataTypes.STRING,
+            telefone: DataTypes.STRING            
         },{
             sequelize: connection,
             schema: 'public',
             tableName: 'clientes',
-            createdAt: 'createAt',
-            updatedAt: 'updateAt',
+            created_at: 'created_at',
+            updated_at: 'updated_at',
             timestamps: true,
             underscore: false
         });

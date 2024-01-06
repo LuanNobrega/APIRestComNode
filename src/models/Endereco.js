@@ -18,8 +18,8 @@ class Endereco extends Model {
             sequelize: connection,
             schema: 'public',
             tableName: 'enderecos',
-            createdAt: 'createAt',
-            updatedAt: 'updateAt',
+            created_at: 'created_at',
+            updated_at: 'updated_at',
             timestamps: true,
             underscore: false
         });

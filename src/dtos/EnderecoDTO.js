@@ -10,7 +10,7 @@ module.exports = class EnderecoDTO{
         this.bairro = obj.bairro;
         this.cidade = obj.cidade;
         this.uf = obj.uf;        
-        this.createAt = obj.createAt;
-        this.updateAt = obj.updateAt;
+        this.created_at = obj.created_at;
+        this.updated_at = obj.updated_at;
     }
 }

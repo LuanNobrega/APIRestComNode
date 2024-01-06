@@ -11,25 +11,25 @@ DELETE http://localhost:3000/logout
 Authorization: 2ecb16f8a9b66c28c410bbdc30cfeebd 
 
 ###
-GET http://localhost:3000/usuarios/8
-Authorization: 9c34949c2570a41c0db3f64f49e20094
+GET http://localhost:3000/usuarios/3
+Authorization: c317a34b2fec8f9b4ee27a2e5717e89b
 
 ###
 POST http://localhost:3000/usuarios/
 Content-Type: application/json
-Authorization: 96ef38c321487ca1d600f6a106333b87
+Authorization: c317a34b2fec8f9b4ee27a2e5717e89b
 
 {
-    "nome": "João",
-    "email": "joao@gmail.com",
-    "senha": "654321",
-    "idPerfil": 1
+    "nome": "Luan",
+    "email": "luan@gmail.com",
+    "senha": "123456",
+    "idPerfil": 3
 }
 
 ###
-PUT http://localhost:3000/usuariosatualizar/8
+PUT http://localhost:3000/usuariosatualizar/5
 Content-Type: application/json
-Authorization: dd59489128a34b98ca66a6774267a016
+Authorization: c317a34b2fec8f9b4ee27a2e5717e89b
 
 {
   "nome": "Maria de Souza",

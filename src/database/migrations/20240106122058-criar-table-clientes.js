@@ -9,43 +9,28 @@ module.exports = {
         primaryKey: true,
         autoIncrement: true
       },
-      idCliente: {
-        type: Sequelize.BIGINT,
-        allowNull: false
+      nome: {
+        type: Sequelize.STRING,
+        allowNull: false,
       },
-      cep: {
+      email: {
         type: Sequelize.STRING,
-        allowNull: true
+        allowNull: false,
       },
-      rua: {
+      cpfoucnpj: {
         type: Sequelize.STRING,
-        allowNull: true
+        allowNull: false,
+        unique: true
       },
-      numero: {
+      telefone: {
         type: Sequelize.STRING,
-        allowNull: true
+        allowNull: true,
       },
-      complemento: {
-        type: Sequelize.STRING,
-        allowNull: true
-      },
-      bairro: {
-        type: Sequelize.STRING,
-        allowNull: true
-      },         
-      cidade: {
-        type: Sequelize.STRING,
-        allowNull: true
-      }, 
-      uf: {
-        type: Sequelize.STRING,
-        allowNull: true
-      }, 
-      createAt: {
+      created_at: {
         type: Sequelize.DATE,
         defaultValue: Sequelize.fn('NOW')
       },
-      updateAt:{
+      updated_at:{
         type: Sequelize.DATE,
         defaultValue: null,
         allowNull: true

@@ -75,6 +75,9 @@ dentro desse arquivo é onde iremos importar e inicializar os modelos criados.
     - Criar DTO para endereço;
     - Criar serviço
      - Importar os modelos, os DTO e os erros;
+    - criar o controller;
+    - Rodar as migrations para criar as tabelas;
+    - Criar o hash do cliente, arquivo http.
 
 
 
