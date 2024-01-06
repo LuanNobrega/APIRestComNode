@@ -3,14 +3,21 @@
 const {Model, DataTypes} = require('sequelize');
 
 //Todos os modelos terão um método init para que o sequelize se ache e faça o trabalho dele corretamente.
-class Perfil extends Model {
+class Endereco extends Model {
     static init(connection){
         super.init({
-            descricao: DataTypes.STRING //Não apsseo o id e os "dates" pois o sequelize já entendem eles 
+            idCliente: DataTypes.BIGINT,
+            cep: DataTypes.STRING, //Não apsseo o id e os "dates" pois o sequelize já entendem eles
+            rua: DataTypes.STRING,
+            numero: DataTypes.STRING,
+            complemento: DataTypes.STRING,
+            bairro: DataTypes.STRING,
+            cidade: DataTypes.STRING,
+            uf: DataTypes.STRING
         },{
             sequelize: connection,
             schema: 'public',
-            tableName: 'perfis',
+            tableName: 'enderecos',
             createdAt: 'createAt',
             updatedAt: 'updateAt',
             timestamps: true,
@@ -19,4 +26,4 @@ class Perfil extends Model {
     }
 }
 
-module.exports = Perfil;
+module.exports = Endereco;

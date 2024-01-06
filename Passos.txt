@@ -67,3 +67,24 @@ dentro desse arquivo é onde iremos importar e inicializar os modelos criados.
     - Criar um método no usuarioService para atualizar o usuario, criar o método no usuarioController e tambem o método no usuarioDTO;
     - Criou o serviço, criou o controller, em seguida cria a rota.
     - Criar a rota.
+
+20° Criar a migration de "clientes" e "enderecos", contruir o models dela e em seguida iniciar ela dentro de index.js
+
+21° Criar o serviço de cliente, e ele será o responsável por configurar o endereço. 
+    - Criar DTO para Cliente;
+    - Criar DTO para endereço;
+    - Criar serviço
+     - Importar os modelos, os DTO e os erros;
+
+
+
+==============================
+
+Passos para criar uma entidade por completo:
+
+1 - Criar a migration
+2 - Criar o model
+3 - Criar o DTO
+4 - Criar o serviço
+5 - Criar o controller
+6 - Criar as rotas no routes.js

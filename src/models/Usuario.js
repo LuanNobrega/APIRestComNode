@@ -15,8 +15,8 @@ class Usuario extends Model {
             sequelize: connection,
             schema: 'public',
             tableName: 'usuarios',
-            createAt: 'criadoEm',
-            updateAt: 'atualizadoEm',
+            createdAt: 'createAt',
+            updatedAt: 'updateAt',
             timestamps: true,
             underscored: false
         });
