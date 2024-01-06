@@ -1,6 +1,6 @@
 const Usuario = require('../models/Usuario')
 constPerfil = require('../models/Perfil')
-const {NaoAutorizadoErro, NaoEncontradoErro} = require('../erros/typeErros')
+const {NaoAutorizadoErro, NaoEncontradoErro, AplicacaoErro} = require('../erros/typeErros')
 const geradorToken = require('../utils/geradorToken')
 const usuarioCache = require('../cache/usuarioCache') 
 const Perfil = require('../models/Perfil')
@@ -56,6 +56,39 @@ async function validarAutenticacao(token){
     return true;
 }
 
+async function cadastrar(usuarioDTO){
+    usuarioDTO.senha = geradorToken.gerarHashDaSenha(usuarioDTO.senha);
+    let usuario = await Usuario.create(usuarioDTO);
+
+    if(!usuario){
+        throw new AplicacaoErro(500, 'Falha ao cadastrar o usuário')
+    }
+    
+    let dto = new UsuarioDTO(usuario);
+    dto.senha = undefined;
+    dto.perfil = new PerfilDTO(await Perfil.findByPk(dto.idPerfil));
+    return dto;
+}
+
+async function atualizar(usuarioDTO){
+    let usuario = await Usuario.findByPk(usuarioDTO.id);
+   
+    if(!usuario){
+        throw new NaoEncontradoErro(404, "Não foi possível encontrar o usuário pelo id"+ id);
+    }
+
+    usuarioDTO.senha = usuario.senha;
+
+    usuario = await Usuario.update(usuarioDTO, { where: { id: usuarioDTO.id }});
+
+    //O sequelize sempre retorna um array com dois objetos, por isso usamos a posição 0 do array. 
+    if(!usuario || !usuario[0]){
+        throw new AplicacaoErro(500, 'Falha ao atualizar o usuário com id' + usuarioDTO.id)
+    }
+    usuarioDTO.senha = undefined;
+    return usuarioDTO;
+}
+
 //Função privada
 function _criarCredencial(usuario){
 
@@ -79,4 +112,4 @@ function _criarCredencial(usuario){
     return credencial;
 }
 
-module.exports = {validarUsuario, logout, obterPorId, validarAutenticacao};
+module.exports = {validarUsuario, logout, obterPorId, validarAutenticacao, cadastrar, atualizar};

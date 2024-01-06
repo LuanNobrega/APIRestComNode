@@ -1,5 +1,6 @@
 const usuarioService = require('../services/usuarioService');
 const {NaoAutorizadoErro, ModeloInvalidoErro} = require('../erros/typeErros');
+const UsuarioDTO = require('../dtos/usuarioDTO');
 
 class UsuarioController{
     async login(req, res){
@@ -13,6 +14,7 @@ class UsuarioController{
 
         } catch (error) {
             console.log(error);
+            return res.status(error.status).json(error);
         }
     }
 
@@ -40,8 +42,33 @@ class UsuarioController{
         }
     }
 
-    adicionar(req, res){
-        
+    async cadastrar(req, res){
+        try {
+            let usuarioDTO = new UsuarioDTO(req.body);
+            usuarioDTO.modeloValidoCadastro();
+            let usuarioCadastrado = await usuarioService.cadastrar(usuarioDTO);
+            return res.json(usuarioCadastrado)
+        } catch (error) {
+            console.log(error);
+            return res.status(error.status).json(error);
+        }
+    }
+
+    async atualizar(req, res){
+        const { id } = req.params;
+        try {
+            if(!id){
+                throw new ModeloInvalidoErro(400, "O id é obrigatório para atualizar o usuário!")
+            }
+            let usuarioDTO = new UsuarioDTO(req.body);
+            usuarioDTO.id = parseInt(id);
+            usuarioDTO.modeloValidoAtualizacao();
+            let usuarioAtualizado = await usuarioService.atualizar(usuarioDTO);
+            return res.json(usuarioAtualizado)
+        } catch (error) {
+            console.log(error);
+            return res.status(error.status).json(error);
+        }
     }
 
     atualizar(req, res){

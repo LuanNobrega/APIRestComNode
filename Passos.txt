@@ -56,3 +56,14 @@ dentro desse arquivo é onde iremos importar e inicializar os modelos criados.
     - Importar tanto o Perfil em usuarioService, 
 
 18° Criar um interceptador de rotas, criar um "routes,use" no arquivos de rotas. 
+
+19° Criar método para cadastrar usuário;
+    - Sempre vai receber um usuário DTO, sempre que tiver que trafegar um usuário entre as camadas, sempre será o UsuarioDTO. 
+    - Criar o método de cadastrar no "usuario.http"
+    - Criar a lógica do método cadastrar no "usuarioController". 
+    - Adicionar método de validação do cadastro no arquivo "UsuarioDTO". 
+
+19° Criar métodos para atualizar o usuário. 
+    - Criar um método no usuarioService para atualizar o usuario, criar o método no usuarioController e tambem o método no usuarioDTO;
+    - Criou o serviço, criou o controller, em seguida cria a rota.
+    - Criar a rota.

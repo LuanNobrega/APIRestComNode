@@ -66,5 +66,6 @@ module.exports = {
     ModeloInvalidoErro,
     NaoAutorizadoErro,
     NaoEncontradoErro,
-    NaoAutorizadoErro
+    NaoAutorizadoErro,
+    AplicacaoErro
 }
