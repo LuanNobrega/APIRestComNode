@@ -15,6 +15,14 @@ module.exports = class ClienteDTO{
     }
 
     modeloValidoCadastro(){
+        this._validarModelo();
+    }
+
+    modeloValidoAtualizacao(){
+        this._validarModelo();
+    }
+
+    _validarModelo(){
         let valido = !!(this.nome);
         if(!valido){
             throw new ModeloInvalidoErro(400, 'O nome é obrigatório para cadastro.')

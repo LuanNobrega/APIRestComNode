@@ -16,6 +16,11 @@ async function obterPorId(id){
     return cliente;
 }
 
+async function obterTodos(){
+    let clientes = await Cliente.findAll();
+    return clientes && clientes.map(c => new ClienteDTO(c));
+}
+
 async function cadastrar(clienteDTO){
     let cliente = await Cliente.create(clienteDTO);
     if(!cliente){
@@ -40,7 +45,7 @@ async function cadastrar(clienteDTO){
 async function atualizar(clienteDTO){
     //Verificar se ele existe no banco
     let cliente = await Cliente.findByPk(clienteDTO.id);
-    if(cliente){
+    if(!cliente){
         throw new NaoEncontradoErro(404, 'Não foi possível encontrar um cliente com id ' + clienteDTO.id);
     }
     let atualizado = await Cliente.update(clienteDTO, { where: {id: clienteDTO.id}});
@@ -48,14 +53,10 @@ async function atualizar(clienteDTO){
         throw new AplicacaoErro(500, 'Não foi possível atualizar o cliente.')
     }
 
-    let enderecos = [];
-
-    for(var endereco in clienteDTO.enderecos){
-        let atualizado = await Endereco.update(endereco, { where: { id: endereco.id }});
-        enderecos.push(new EnderecoDTO(atualizado));
+    for(var endereco of clienteDTO.enderecos){
+        await Endereco.update(endereco, { where: { id: endereco.id }});
     }
-    clienteDTO.enderecos = enderecos;
     return clienteDTO;
 }
 
-module.exports = {cadastrar, atualizar, obterPorId};
+module.exports = {cadastrar, atualizar, obterPorId, obterTodos};

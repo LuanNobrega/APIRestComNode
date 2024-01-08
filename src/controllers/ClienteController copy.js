@@ -18,6 +18,16 @@ class ClienteController{
         } 
     }
 
+    async obterTodos(req, res){
+        try {
+            let clientes = await clienteService.obterTodos();
+            return res.json(clientes);
+        } catch (error) {
+            console.log(error);
+            return res.status(error.status).json(error);
+        } 
+    }
+
     async cadastrar(req, res){
         try {
             let clienteDTO = new ClienteDTO(req.body);

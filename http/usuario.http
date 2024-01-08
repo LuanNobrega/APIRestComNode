@@ -27,7 +27,7 @@ Authorization: c317a34b2fec8f9b4ee27a2e5717e89b
 }
 
 ###
-PUT http://localhost:3000/usuariosatualizar/5
+PUT http://localhost:3000/usuariosatualizar/4
 Content-Type: application/json
 Authorization: c317a34b2fec8f9b4ee27a2e5717e89b
 

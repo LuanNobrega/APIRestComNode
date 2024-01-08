@@ -38,5 +38,6 @@ routes.put("/usuariosatualizar/:id", usuarioController.atualizar);
 routes.get("/clientes/:id", clienteController.obterPorId);
 routes.post("/clientes", clienteController.cadastrar);
 routes.put("/clientes/:id", clienteController.atualizar);
+routes.get("/clientes", clienteController.obterTodos);
 
 module.exports = routes;

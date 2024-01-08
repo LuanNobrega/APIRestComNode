@@ -1,61 +1,74 @@
 POST http://localhost:3000/clientes
 Content-Type: application/json
-Authorization: 4d3b89a7a05cacf2d13a70ebb47f644d
+Authorization: 5da169f02e191b4406003ddded0584be
 
 {
-    "nome": "Fulano de tal",
-    "email": "fulano@gmail.com",
-    "cpfoucnpj": "12345678901",
+    "nome": "Cliente 2",
+    "email": "cliente2@gmail.com",
+    "cpfoucnpj": "99988877744",
     "telefone": "83999998888",
     "enderecos": [
         {
-            "cep": "25500456",
-            "rua": "Rua torta",
-            "numero": "25",
-            "complemento": "Casa 2 - Fundos",
-            "bairro": "Lugar nenhum",
-            "cidade": "Imaginária",
-            "uf": "PB"
+            "cep": "00000000",
+            "rua": "Rua dois",
+            "numero": "2534",
+            "complemento": "APTO",
+            "bairro": "Logo ali",
+            "cidade": "SAnta Luzia",
+            "uf": "RO"
         },
         {
-            "cep": "58600000",
-            "rua": "Rua torta das portas",
-            "numero": "8787",
-            "complemento": "APTO",
-            "bairro": "Do Zé",
-            "cidade": "Eita Danado",
-            "uf": "RR"
+            "cep": "58666666",
+            "rua": "Rua",
+            "numero": "845",
+            "complemento": "APTO APTO APTO",
+            "bairro": "São José",
+            "cidade": "Patos",
+            "uf": "RJ"
         }
     ]
 }
 
 ###
-DELETE http://localhost:3000/logout
-Authorization: 2ecb16f8a9b66c28c410bbdc30cfeebd 
+GET http://localhost:3000/clientes/4
+Authorization: 886258c408970a7dfd7bd775c0a21873
 
 ###
-GET http://localhost:3000/usuarios/8
-Authorization: 9c34949c2570a41c0db3f64f49e20094
+GET http://localhost:3000/clientes
+Authorization: 79d07512d8676fffa244a14ffb15a05e
 
 ###
-POST http://localhost:3000/usuarios/
+PUT http://localhost:3000/clientes/4
 Content-Type: application/json
-Authorization: 96ef38c321487ca1d600f6a106333b87
+Authorization: 6bb2feff8411e8356d11b71c9f226eb8
 
 {
-    "nome": "João",
-    "email": "joao@gmail.com",
-    "senha": "654321",
-    "idPerfil": 1
-}
-
-###
-PUT http://localhost:3000/usuariosatualizar/8
-Content-Type: application/json
-Authorization: dd59489128a34b98ca66a6774267a016
-
-{
-  "nome": "Maria de Souza",
-  "email": "mariadesouza@gmail.com",
-  "idPerfil": 3
+  "nome": "Cliente 3 da Silva",
+  "email": "clientedasilva33333@gmail.com",
+  "cpfoucnpj": "3311122233344",
+  "telefone": "83333",
+  "enderecos": [
+    {
+      "id": "3",
+      "idCliente": "4",
+      "cep": "3333000",
+      "rua": "Rua dois A",
+      "complemento": "CASA",
+      "numero": "2",
+      "bairro": "Logo ali assim",
+      "cidade": "SAnta Luzia dos grudes",
+      "uf": "SP"
+    },
+    {
+      "id": "4",
+      "idCliente": "4",
+      "cep": "333366666",
+      "rua": "Rua",
+      "complemento": " 33333 APTO APTO APTO",
+      "numero": "845",
+      "bairro": "São José",
+      "cidade": "Patos",
+      "uf": "RJ"
+    }
+  ]
 }
