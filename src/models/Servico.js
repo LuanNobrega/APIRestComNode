@@ -13,8 +13,8 @@ class Servico extends Model {
             sequelize: connection,
             schema: 'public',
             tableName: 'servicos',
-            createdat: 'createdat',
-            updatedat: 'updatedat',
+            criadoem: 'criadoem',
+            atualizadoem: 'atualizadoem',
             timestamps: true,
             underscore: false
         });

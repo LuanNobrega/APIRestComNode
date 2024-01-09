@@ -3,7 +3,7 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {
-    return queryInterface.createTable('servicos',{
+    return queryInterface.createTable('orcamentos',{
       id: {
         type: Sequelize.BIGINT,
         primaryKey: true,
@@ -13,7 +13,19 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false
       },
-      valor: {
+      idcliente: {
+        type: Sequelize.BIGINT,
+        allowNull: false
+      },
+      desconto: {
+        type: Sequelize.DOUBLE,
+        allowNull: false
+      },
+      acrescimo: {
+        type: Sequelize.DOUBLE,
+        allowNull: false
+      },
+      valortotal: {
         type: Sequelize.DOUBLE,
         allowNull: false
       },
@@ -32,12 +44,10 @@ module.exports = {
         allowNull: true,
         field: 'atualizadoem'
       }
-
-
     })
   },
 
   async down (queryInterface, Sequelize) {
-    return queryInterface.dropTable('servicos')
+    return queryInterface.dropTable('orcamentos')
   }
 };

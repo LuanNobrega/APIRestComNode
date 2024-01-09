@@ -9,40 +9,36 @@ module.exports = {
         primaryKey: true,
         autoIncrement: true
       },
-      descricao: {
-        type: Sequelize.STRING,
-        allowNull: false
-      },
       nome: {
         type: Sequelize.STRING,
         allowNull: false
       },
       email: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: true
       },
       telefone: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: true
       },
       cpfoucnpj: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: true
       },
       observacao: {
         type: Sequelize.TEXT,
         allowNull: true
       },
-      createdat: {
+      criadoem: {
         type: Sequelize.DATE,
         defaultValue: Sequelize.fn('NOW'),
-        field: 'createdat'
+        field: 'criadoem'
       },
-      updatedat:{
+      atualizadoem:{
         type: Sequelize.DATE,
         defaultValue: null,
         allowNull: true,
-        field: 'updatedat'
+        field: 'atualizadoem'
       }
 
 

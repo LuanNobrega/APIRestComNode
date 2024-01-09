@@ -13,6 +13,8 @@ const Endereco = require('../models/Endereco');
 const Perfil = require('../models/Perfil');
 const Prestador = require('../models/Cliente');
 const Servico = require('../models/Servico');
+const Orcamento = require('../models/Orcamento');
+const Orcamentoitem = require('../models/Orcamentoitem');
 
 //Inicializando o modelo;
 Perfil.init(connection);
@@ -22,5 +24,7 @@ Endereco.init(connection);
 Status.init(connection);
 Prestador.init(connection);
 Servico.init(connection);
+Orcamento.init(connection);
+Orcamentoitem.init(connection);
 
 module.exports = connection;
