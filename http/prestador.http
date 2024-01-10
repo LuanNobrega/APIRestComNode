@@ -1,0 +1,28 @@
+POST http://localhost:3000/prestadores
+Content-Type: application/json
+Authorization: 8b944a3481ec2d50d5f57e2d90d57143
+
+{
+    "nome": "Manoel de alguma coisa",
+    "email": "manoel.gmail.com",
+    "telefone": "655689865",
+    "observacao": "trabalhador"
+}
+
+###
+GET http://localhost:3000/prestadores/4
+Authorization: 886258c408970a7dfd7bd775c0a21873
+
+###
+GET http://localhost:3000/prestadores
+Authorization: 79d07512d8676fffa244a14ffb15a05e
+
+###
+PUT http://localhost:3000/prestadores/4
+Content-Type: application/json
+Authorization: 6bb2feff8411e8356d11b71c9f226eb8
+
+{
+    "descricao": "Pintura interior m²",
+    "valor": 100.0,
+}

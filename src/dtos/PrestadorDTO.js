@@ -3,14 +3,14 @@ const { ModeloInvalidoErro } = require("../erros/typeErros");
 module.exports = class PrestadorDTO{
     constructor(obj){
         obj = obj || {};
-        this.id = obj.id;
-        this.nome = obj.nome;
-        this.email = obj.email;
-        this.cpfoucnpj = obj.cpfoucnpj;
-        this.telefone = obj.telefone;  
-        this.observacao = obj.observacao;    
-        this.criadoem = obj.criadoem;
-        this.atualizadoem = obj.atualizadoem;
+        this.id = obj.id || null;
+        this.nome = obj.nome || null;
+        this.email = obj.email || null;
+        this.cpfoucnpj = obj.cpfoucnpj || null;
+        this.telefone = obj.telefone || null;
+        this.observacao = obj.observacao || null;
+        this.criadoem = obj.criadoem || null;
+        this.atualizadoem = obj.atualizadoem || null;
     }
 
     modeloValidoCadastro(){

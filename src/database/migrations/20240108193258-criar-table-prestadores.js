@@ -40,8 +40,6 @@ module.exports = {
         allowNull: true,
         field: 'atualizadoem'
       }
-
-
     })
   },
 

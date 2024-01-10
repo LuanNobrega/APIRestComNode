@@ -21,16 +21,14 @@ module.exports = {
         type: Sequelize.TEXT,
         allowNull: true
       },
-      criadoem: {
+      created_at: {
         type: Sequelize.DATE,
-        defaultValue: Sequelize.fn('NOW'),
-        field: 'criadoem'
+        defaultValue: Sequelize.fn('NOW')
       },
-      atualizadoem:{
+      updated_at:{
         type: Sequelize.DATE,
         defaultValue: null,
-        allowNull: true,
-        field: 'atualizadoem'
+        allowNull: true
       }
 
 

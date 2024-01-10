@@ -17,7 +17,6 @@ class Prestador extends Model {
             tableName: 'prestadores',
             criadoem: 'criadoem',
             atualizadoem: 'atualizadoem',
-            timestamps: true,
             underscore: false
         });
     }

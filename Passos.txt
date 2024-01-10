@@ -88,6 +88,8 @@ dentro desse arquivo é onde iremos importar e inicializar os modelos criados.
 
 24° Criar as DTOs de orçamento e orçamentoItens
 
+25° Criar o service, o controller e as rotas para o "serviço" e "prestador".
+
 
 
 ==============================
@@ -100,3 +102,26 @@ Passos para criar uma entidade por completo:
 4 - Criar o serviço
 5 - Criar o controller
 6 - Criar as rotas no routes.js
+
+================================
+
+Para obter os orçamentos, como fazer?
+
+Consultas ao banco: (São muitas consultas);
+1 - Obter a capa (orçamento);
+2 - Obter os itens vinculados ao orçamento;
+3 - Para cada orçamentoItem
+    3.1 - Prestador;
+    3.2 - Serviço;
+3- Cliente
+
+Objetos simples: 
+Persistencia: Utilizar o sequelize.
+Consultas: sequelize.
+
+Objetos complexos, com muitas consultas (ex: Orçamento):
+Persistencia: Utilizar o sequelize.
+Consultas: CQRS. - Consultas diretas ao banco de dados, a famosa query;
+
+CQRS: DDD arquitetura escaláveis.
+CQRS - Comand Query Responsability Segregation

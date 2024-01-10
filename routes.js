@@ -4,11 +4,15 @@ const routes = express.Router(); //Com esse cara dizemos que esse arquivo é um 
 
 const UsuarioController = require('./src/controllers/UsuarioController');
 const usuarioService = require('./src/services/usuarioService');
-const ClienteController = require('./src/controllers/ClienteController copy');
+const ClienteController = require('./src/controllers/ClienteController');
+const ServicoController = require('./src/controllers/ServicoController');
+const PrestadorController = require('./src/controllers/PrestadorController');
 
 //Instaciar um usuário controler para ter acesso a tudo que está dentro dele
 const usuarioController = new UsuarioController();
 const clienteController = new ClienteController();
+const servicoController = new ServicoController();
+const prestadorController = new PrestadorController();
 
 
 //Método interceptador, sempre vai cair aqui primeiro. Intercepta todas as rotas e aqui podemso tomar qualquer ação antes de bater em uma rota específica. 
@@ -39,5 +43,17 @@ routes.get("/clientes/:id", clienteController.obterPorId);
 routes.post("/clientes", clienteController.cadastrar);
 routes.put("/clientes/:id", clienteController.atualizar);
 routes.get("/clientes", clienteController.obterTodos);
+
+//Rotas de serviço
+routes.get("/servicos/:id", servicoController.obterPorId);
+routes.post("/servicos", servicoController.cadastrar);
+routes.put("/servicos/:id", servicoController.atualizar);
+routes.get("/servicos", servicoController.obterTodos);
+
+//Rotas de prestador
+routes.get("/prestadores/:id", prestadorController.obterPorId);
+routes.post("/prestadores", prestadorController.cadastrar);
+routes.put("/prestadores/:id", prestadorController.atualizar);
+routes.get("/prestadores", prestadorController.obterTodos);
 
 module.exports = routes;

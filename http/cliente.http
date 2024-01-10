@@ -1,9 +1,9 @@
 POST http://localhost:3000/clientes
 Content-Type: application/json
-Authorization: 5da169f02e191b4406003ddded0584be
+Authorization: 796551c9e48fae44d669ca5e55d05fd3
 
 {
-    "nome": "Cliente 2",
+    "nome": "Cliente",
     "email": "cliente2@gmail.com",
     "cpfoucnpj": "99988877744",
     "telefone": "83999998888",

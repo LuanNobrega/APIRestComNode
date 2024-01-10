@@ -1,0 +1,26 @@
+POST http://localhost:3000/servicos
+Content-Type: application/json
+Authorization: 2f743bd9bfc6e4a4b12edacbfb554086
+
+{
+    "descricao": "Serviõ 2 m²",
+    "valor": 600.0
+}
+
+###
+GET http://localhost:3000/servicos/4
+Authorization: 886258c408970a7dfd7bd775c0a21873
+
+###
+GET http://localhost:3000/servicos
+Authorization: 79d07512d8676fffa244a14ffb15a05e
+
+###
+PUT http://localhost:3000/servicos/4
+Content-Type: application/json
+Authorization: 6bb2feff8411e8356d11b71c9f226eb8
+
+{
+    "descricao": "Pintura interior m²",
+    "valor": 100.0,
+}
