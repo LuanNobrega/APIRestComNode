@@ -9,6 +9,10 @@
     "criar-migration": "yarn sequelize migration:create --name=criar-table-xyz",
     "executar-migration": "yarn sequelize db:migrate",
     "desfazer-migration": "yarn sequelize db:migrate:undo",
+    "criar-seedres": "yarn sequelize seed:create --name=seed-table-xyz",
+    "executar-seeder": "yarn sequelize db:seed:all",
+    "iniciar-banco": "yarn sequelize db:create && yarn sequelize db:migrate",
+    "iniciar-banco-com-dados": "yarn sequelize db:create && yarn sequelize db:migrate && yarn sequelize db:seed:all",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "luan.snobrega@gmail.com",

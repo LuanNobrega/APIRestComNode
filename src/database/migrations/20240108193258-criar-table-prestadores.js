@@ -20,7 +20,7 @@ module.exports = {
           type: Sequelize.STRING,
           allowNull: true
         },
-        cpfOuCnpj: {
+        cpfoucnpj: {
           type: Sequelize.STRING,
           allowNull: true
         },

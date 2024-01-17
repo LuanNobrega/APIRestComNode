@@ -35,7 +35,7 @@ Authorization: 886258c408970a7dfd7bd775c0a21873
 
 ###
 GET http://localhost:3000/clientes
-Authorization: 79d07512d8676fffa244a14ffb15a05e
+Authorization: 
 
 ###
 PUT http://localhost:3000/clientes/4
