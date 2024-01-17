@@ -1,53 +1,156 @@
 const Orcamento = require('../models/Orcamento');
-const OrcamentoItem = require('../models/Orcamentoitem');
+const OrcamentoItem = require('../models/OrcamentoItem');
 const OrcamentoDTO = require('../dtos/OrcamentoDTO');
 const OrcamentoItemDTO = require('../dtos/OrcamentoitemDTO');
+const orcamentoCQRS = require('../cqrs/orcamentoCQRS');
+const connection = require('../database/index');
 
-const {NaoEncontradoErro, AplicacaoErro} = require('../erros/typeErros');
-
+const { NaoEncontratoErro, AplicacaoErro } = require('../erros/typeErros');
 async function obterPorId(id){
     let orcamento = await Orcamento.findByPk(id);
+
     if(!orcamento){
-        throw new NaoEncontradoErro(404, 'Não foi possível encontrar o orcamento com o id ' + id);
+        throw new NaoEncontratoErro(404, 'Não foi possível encontrar um orcamento com id ' + id);
     }
 
-    //Pegar todos os itens que tem no orçamento;
-    //Para cada item pegar o serviço
-    //Para cada item pegar o prestador
-
-
-
-    return new ServicoDTO(servico);       
+    return await orcamentoCQRS.obterOrcamento(id);
 }
 
+
 async function obterTodos(){
-    let servicos = await Servico.findAll();
-    return servicos && servicos.map(s => new ServicoDTO(s));
+    return await orcamentoCQRS.obterOrcamentos();
 }
 
 async function cadastrar(orcamentoDTO){
-    let servico = await Servico.create(servicoDTO);
     
-    //Para cada item, salvar o item no banco;
-    // Salvar os dados da capa no banco;
-    
-    if(!servico){
-        throw new AplicacaoErro(500, 'Não foi possível cadastrar o serviço.')
-    }   
-    return new ServicoDTO(servico);
+    let transaction = await connection.transaction();
+
+    try {
+
+        orcamentoDTO.idCliente = orcamentoDTO.cliente.id;
+        orcamentoDTO.id = undefined;
+        // orcamentoDTO.idStatus = orcamentoDTO.status.id;
+
+        let orcamento = await Orcamento.create(orcamentoDTO, { transaction });
+
+        orcamento = new OrcamentoDTO(orcamento);
+
+        orcamento.itens = orcamentoDTO.itens.map(item => {
+            item.id = undefined;
+            item.idOrcamento = orcamento.id;
+            item.idServico = item.servico.id;
+            item.idPrestador = item.prestador.id;
+            item.calcularValorTotal();
+
+            return item;
+        });
+
+        let itens = await OrcamentoItem.bulkCreate(orcamento.itens, { transaction, returning: true, validate: true });
+
+        if(!itens){
+            throw new AplicacaoErro(500,'Não foi possível cadastrar os itens.');
+        }
+
+        await transaction.commit();
+
+        return orcamentoCQRS.obterOrcamento(orcamento.id);
+
+    } catch (error) {
+        await transaction.rollback();
+    }
+
+
+    return {};
 }
 
-async function atualizar(servicoDTO){
-    //Verificar se ele existe no banco
-    let servico = await Servico.findByPk(servicoDTO.id);
-    if(!servico){
-        throw new NaoEncontradoErro(404, 'Não foi possível encontrar um serviço com id ' + servicoDTO.id);
+async function atualizar(orcamentoDTO){
+    let transaction = await connection.transaction();
+
+    try {
+
+        let orcamentoBanco = await orcamentoCQRS.obterOrcamento(orcamentoDTO.id);
+
+        if(!orcamentoBanco){
+            throw new NaoEncontratoErro(404, "Não é possível atualizar o orcamento pelo id " + orcamentoDTO.id);
+        }
+
+        await _adicionarItens(orcamentoDTO, orcamentoBanco, transaction);
+        await _atualizarItens(orcamentoDTO, orcamentoBanco, transaction);
+        await _deletarItens(orcamentoDTO, orcamentoBanco, transaction);
+
+        await transaction.commit();
+
+        return await orcamentoCQRS.obterOrcamento(orcamentoDTO.id);
+
+    } catch (error) {
+        await transaction.rollback();
+        throw new AplicacaoErro(500, 'Não foi possível atualizar o orcamento, motivo: '+ error);
     }
-    let atualizado = await Servico.update(servicoDTO, { where: {id: servicoDTO.id}});
-    if(!atualizado){
-        throw new AplicacaoErro(500, 'Não foi possível atualizar o serviçoe.')
-    }
-    return servicoDTO;
 }
 
-module.exports = {cadastrar, atualizar, obterPorId, obterTodos};
+async function _adicionarItens(orcamentoDTO, orcamentoBanco, transaction){
+    let itensAdicionados = [];
+
+    orcamentoDTO.itens.map(item => {
+
+        if(!orcamentoBanco.itens.some(i => i.id == item.id)){
+            item.idOrcamento = orcamentoDTO.id;
+            item.idServico = item.servico.id;
+            item.idPrestador = item.prestador.id;
+            item.calcularValorTotal();
+            
+            itensAdicionados.push(item);
+        }
+    });
+
+    if(itensAdicionados.length){
+        itensAdicionados =  await OrcamentoItem.bulkCreate(itensAdicionados, { 
+             transaction, returning: true, validate: true 
+        });
+    }
+}
+
+async function _atualizarItens(orcamentoDTO, orcamentoBanco, transaction){
+
+    let itensParaAtualizar = [];
+
+    orcamentoDTO.itens.map(item => {
+
+        if(orcamentoBanco.itens.some(i => i.id == item.id)){
+            item.calcularValorTotal();
+            itensParaAtualizar.push(item);
+        }           
+    });
+
+    if(itensParaAtualizar.length){
+
+        for(let item of itensParaAtualizar){
+            await OrcamentoItem.update(item, { where : { id: item.id }});
+        }
+    }
+}
+
+async function _deletarItens(orcamentoDTO, orcamentoBanco, transaction){
+
+    let itensParaRemover = []; 
+    orcamentoBanco.itens.map(item => {
+
+        if(!orcamentoDTO.itens.some(i => i.id == item.id)){
+            itensParaRemover.push(item);
+        }
+    });
+
+    if(itensParaRemover.length){
+        await OrcamentoItem.destroy({ where: 
+            { id: itensParaRemover.map(i => i.id) }, transaction 
+        });
+    }
+}
+
+
+module.exports = {
+    obterPorId,
+    obterTodos,
+    cadastrar,
+    atualizar
+}

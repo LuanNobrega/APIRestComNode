@@ -1,11 +1,11 @@
-const Usuario = require('../models/Usuario')
+const Usuario = require('../models/Usuario');
 constPerfil = require('../models/Perfil')
-const {NaoAutorizadoErro, NaoEncontradoErro, AplicacaoErro} = require('../erros/typeErros')
-const geradorToken = require('../utils/geradorToken')
-const usuarioCache = require('../cache/usuarioCache') 
-const Perfil = require('../models/Perfil')
-const UsuarioDTO = require('../dtos/usuarioDTO')
-const PerfilDTO = require('../dtos/PerfilDTO')
+const {NaoAutorizadoErro, NaoEncontradoErro, AplicacaoErro} = require('../erros/typeErros');
+const geradorToken = require('../utils/geradorToken');
+const usuarioCache = require('../cache/usuarioCache');
+const Perfil = require('../models/Perfil');
+const UsuarioDTO = require('../dtos/usuarioDTO');
+const PerfilDTO = require('../dtos/PerfilDTO');
 
 async function validarUsuario(email, senha){
 

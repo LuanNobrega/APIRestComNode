@@ -7,12 +7,14 @@ const usuarioService = require('./src/services/usuarioService');
 const ClienteController = require('./src/controllers/ClienteController');
 const ServicoController = require('./src/controllers/ServicoController');
 const PrestadorController = require('./src/controllers/PrestadorController');
+const OrcamentoController = require('./src/controllers/OrcamentoController');
 
 //Instaciar um usuário controler para ter acesso a tudo que está dentro dele
 const usuarioController = new UsuarioController();
 const clienteController = new ClienteController();
 const servicoController = new ServicoController();
 const prestadorController = new PrestadorController();
+const orcamentoController = new OrcamentoController();
 
 
 //Método interceptador, sempre vai cair aqui primeiro. Intercepta todas as rotas e aqui podemso tomar qualquer ação antes de bater em uma rota específica. 
@@ -55,5 +57,11 @@ routes.get("/prestadores/:id", prestadorController.obterPorId);
 routes.post("/prestadores", prestadorController.cadastrar);
 routes.put("/prestadores/:id", prestadorController.atualizar);
 routes.get("/prestadores", prestadorController.obterTodos);
+
+// Rotas de orcamento 
+routes.post('/orcamentos', orcamentoController.cadastrar);
+routes.get('/orcamentos', orcamentoController.obterTodos);
+routes.get('/orcamentos/:id', orcamentoController.obterPorId);
+routes.put('/orcamentos/:id', orcamentoController.atualizar);
 
 module.exports = routes;

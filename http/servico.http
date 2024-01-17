@@ -1,6 +1,6 @@
 POST http://localhost:3000/servicos
 Content-Type: application/json
-Authorization: 2f743bd9bfc6e4a4b12edacbfb554086
+Authorization: b16f8e6aa3576998f48177bc5123fd7a
 
 {
     "descricao": "Serviõ 2 m²",

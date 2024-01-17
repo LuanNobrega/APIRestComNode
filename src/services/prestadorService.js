@@ -18,9 +18,11 @@ async function obterTodos(){
 
 async function cadastrar(prestadorDTO){
     let prestador = await Prestador.create(prestadorDTO);
+
     if(!prestador){
-        throw new AplicacaoErro(500, 'Não foi possível cadastrar o prestador.')
-    }   
+        throw new AplicacaoErro(500, 'Não foi possível cadastrar o prestador.');
+    }
+
     return new PrestadorDTO(prestador);
 }
 

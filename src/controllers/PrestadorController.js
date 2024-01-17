@@ -32,8 +32,10 @@ class PrestadorController{
         try {
             let prestadorDTO = new PrestadorDTO(req.body);
             prestadorDTO.modeloValidoCadastro();
+
             let prestadorCadastrado = await prestadorService.cadastrar(prestadorDTO);
-            return res.json(prestadorCadastrado)
+            return res.json(prestadorCadastrado);
+
         } catch (error) {
             console.log(error);
             return res.status(error.status).json(error);

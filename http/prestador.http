@@ -1,6 +1,6 @@
 POST http://localhost:3000/prestadores
 Content-Type: application/json
-Authorization: 8b944a3481ec2d50d5f57e2d90d57143
+Authorization: b16f8e6aa3576998f48177bc5123fd7a
 
 {
     "nome": "Manoel de alguma coisa",
